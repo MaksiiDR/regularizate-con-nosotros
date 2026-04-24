@@ -1,0 +1,356 @@
+:root {
+  --bg-color: #F2F2F7;
+  --card-bg: #FFFFFF;
+  --text-primary: #000000;
+  --text-secondary: #8A8A8E;
+  --primary-color: #007AFF;
+  --success-color: #34C759;
+  --danger-color: #FF3B30;
+  --border-color: #E5E5EA;
+  --card-radius: 12px;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent bounce on iOS if needed */
+  overscroll-behavior-y: none;
+}
+
+#root {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05); /* Just for desktop preview to look like a phone */
+}
+
+/* Typography */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+/* Utilities */
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-primary-color {
+  color: var(--primary-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+/* Layout */
+.container {
+  padding: 20px;
+}
+
+.app-header {
+  padding: 20px 20px 10px;
+  background-color: var(--bg-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.summary-card {
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary-color), #005ce6);
+  color: white;
+}
+
+.summary-card .total {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.summary-card p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Lists */
+.list-group {
+  background-color: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.item-left .item-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.item-left .item-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.item-right {
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.item-right .item-amount {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.status-badge {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.status-pending {
+  background-color: #FFF2F2;
+  color: var(--danger-color);
+}
+
+.status-paid {
+  background-color: #E8F8F0;
+  color: var(--success-color);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--card-radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: 100%;
+}
+
+.btn:active {
+  opacity: 0.7;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #E5E5EA;
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-icon {
+  background: transparent;
+  color: var(--primary-color);
+  padding: 8px;
+  width: auto;
+  font-size: 24px;
+}
+.btn-icon-danger {
+  color: var(--danger-color);
+}
+
+.fab {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 440px;
+  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.4);
+  z-index: 20;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 17px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  -webkit-appearance: none;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Modal/Screen Overlay */
+.screen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.screen-header h2 {
+  margin: 0;
+  font-size: 17px;
+  flex: 1;
+  text-align: center;
+}
+
+.screen-header .btn-text {
+  font-size: 17px;
+  color: var(--primary-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.screen-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+/* Actions in lists */
+.item-actions {
+  display: flex;
+  margin-top: 12px;
+  gap: 15px;
+}
+
+.btn-action-text {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-left: -8px; /* offset padding */
+  font-family: var(--font-family);
+  transition: opacity 0.2s;
+}
+
+.btn-action-text:active {
+  opacity: 0.6;
+}
+
+.btn-action-text.edit {
+  color: var(--primary-color);
+}
+
+.btn-action-text.delete {
+  color: var(--danger-color);
+}
