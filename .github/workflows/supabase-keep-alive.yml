@@ -1,0 +1,39 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Se ejecuta cada 3 días a las 12:00 UTC para evitar la pausa por inactividad (7 días)
+    - cron: '0 12 */3 * *'
+  workflow_dispatch: # Permite disparar la acción manualmente desde GitHub Actions
+
+jobs:
+  keep-alive:
+    name: Mantener activa la base de datos Supabase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Realizar ping a Supabase REST API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::error::Faltan las variables SUPABASE_URL o SUPABASE_ANON_KEY en los Secrets del repositorio."
+            exit 1
+          fi
+
+          # Realizar una consulta ligera a la tabla debts para generar actividad real en la base de datos
+          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
+            -X GET "${SUPABASE_URL}/rest/v1/debts?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+
+          echo "Código HTTP recibido: $HTTP_STATUS"
+          echo "Respuesta del servidor:"
+          cat response.json
+          echo ""
+
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
+            echo "✅ Ping exitoso. La base de datos de Supabase permanece activa."
+          else
+            echo "⚠️ Se recibió código HTTP $HTTP_STATUS, pero la solicitud llegó a Supabase y se registró tráfico."
+          fi
