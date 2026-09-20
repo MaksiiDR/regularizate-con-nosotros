@@ -10,6 +10,7 @@ jobs:
   keep-alive:
     name: Mantener activa la base de datos Supabase
     runs-on: ubuntu-latest
+    environment: SUPABASE_URL
     steps:
       - name: Realizar ping a Supabase REST API
         env:
